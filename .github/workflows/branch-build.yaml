@@ -17,7 +17,7 @@ jobs:
       contents: read
       packages: write
     env:
-      DOCKER_REPOSITORY: "ghcr.io/capactio"
+      DOCKER_REPOSITORY: "ghcr.io/pkosiec"
 
     steps:
       - name: Set Docker tag env
