@@ -1,5 +1,5 @@
 import { message } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ARGO_WORKFLOWS_UI_BASE_URL,
@@ -13,17 +13,9 @@ import {
 } from "../generated/graphql";
 
 import Action from "./Action";
-import TypeInstanceDetailsContainer, {
-  TypeInstanceDetailsState,
-} from "../typeinstances/TypeInstanceDetails.container";
 
 interface ActionContainerProps {
   name: string;
-}
-
-interface TypeInstanceDetails {
-  typeInstanceID?: string;
-  visible: boolean;
 }
 
 function ActionContainer({ name }: ActionContainerProps) {
@@ -34,23 +26,6 @@ function ActionContainer({ name }: ActionContainerProps) {
   const navigate = useNavigate();
   const runActionMutation = useRunActionMutation();
   const deleteActionMutation = useDeleteActionMutation();
-
-  const [typeInstanceDetailsState, setTypeInstanceDetailsState] =
-    useState<TypeInstanceDetails>({ visible: false });
-
-  const showTypeInstanceDetails = (typeInstanceID: string) => {
-    setTypeInstanceDetailsState({
-      visible: true,
-      typeInstanceID,
-    });
-  };
-
-  const hideTypeInstanceDetails = () => {
-    setTypeInstanceDetailsState({
-      ...typeInstanceDetailsState,
-      visible: false,
-    });
-  };
 
   const runAction = () => {
     runActionMutation.mutate({ actionName: name });
@@ -82,27 +57,18 @@ function ActionContainer({ name }: ActionContainerProps) {
   }
 
   return (
-    <>
-      {typeInstanceDetailsState.typeInstanceID && (
-        <TypeInstanceDetailsContainer
-          state={typeInstanceDetailsState as TypeInstanceDetailsState}
-          hideFn={hideTypeInstanceDetails}
-        />
-      )}
-      <Action
-        data={data}
-        error={error as Error}
-        isLoading={isLoading}
-        canBeRun={canBeRun}
-        isRunActionLoading={runActionMutation.isLoading}
-        isDeleteActionLoading={deleteActionMutation.isLoading}
-        hasBeenRun={hasBeenRun}
-        argoWorkflowLink={argoWorkflowLink}
-        showTypeInstanceDetails={showTypeInstanceDetails}
-        runAction={runAction}
-        deleteAction={deleteAction}
-      />
-    </>
+    <Action
+      data={data}
+      error={error as Error}
+      isLoading={isLoading}
+      canBeRun={canBeRun}
+      isRunActionLoading={runActionMutation.isLoading}
+      isDeleteActionLoading={deleteActionMutation.isLoading}
+      hasBeenRun={hasBeenRun}
+      argoWorkflowLink={argoWorkflowLink}
+      runAction={runAction}
+      deleteAction={deleteAction}
+    />
   );
 }
 
