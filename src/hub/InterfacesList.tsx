@@ -106,8 +106,8 @@ interface namedEntry {
 function toCodeItemList(arg?: Array<namedEntry | undefined | null>) {
   return arg
     ?.filter((v): v is namedEntry => v !== undefined && v !== null)
-    .map((v) => (
-      <AddTypeRefTooltipIfPossible typeRef={v.typeRef}>
+    .map((v, idx) => (
+      <AddTypeRefTooltipIfPossible key={v.name} typeRef={v.typeRef}>
         <Tag color="blue" style={{ cursor: "default" }} key={v.name}>
           {v.name}
         </Tag>
