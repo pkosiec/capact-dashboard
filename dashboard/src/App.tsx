@@ -26,7 +26,7 @@ function App() {
               <Route index element={<NewInterfaceGroupCatalog />} />
               <Route path=":name" element={<NewInterfacesCatalog />} />
             </Route>
-            <Route path="actions">
+            <Route path="acts">
               <Route index element={<Actions />} />
               <Route path="new/:path/:revision" element={<NewAction />} />
               <Route path=":name" element={<Action />} />
