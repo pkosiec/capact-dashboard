@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Breadcrumb } from "antd";
-import { ActionContainer } from "@capactio/react-components";
+import { ActionDetailsContainer } from "@capactio/react-components";
 import Page from "../layout/Page";
 import { loadRuntimeConfig } from "../config/runtime";
 
@@ -26,7 +26,7 @@ function Action() {
 
   return (
     <Page breadcrumb={breadcrumb} title="Action details">
-      <ActionContainer name={actionName} refetchInterval={queryRefetchIntervalMS} argoWorkflowsUIBaseURL={argoWorkflowsUIBaseURL}/>
+      <ActionDetailsContainer name={actionName} refetchInterval={queryRefetchIntervalMS} argoWorkflowsUIBaseURL={argoWorkflowsUIBaseURL} />
     </Page>
   );
 }

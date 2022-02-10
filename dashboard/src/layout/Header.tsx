@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Header.css";
 
 import { Layout, Menu } from "antd";
-import { AuthContext } from "../auth/AuthContext";
+import { AuthContext } from "@capactio/react-components";
 import {
   LogoutOutlined,
   QuestionCircleOutlined,

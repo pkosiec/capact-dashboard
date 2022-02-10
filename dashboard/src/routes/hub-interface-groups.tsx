@@ -1,7 +1,7 @@
 import { Breadcrumb } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import { InterfaceGroupsContainer } from "@capactio/react-components";
+import { InterfaceGroupCardsContainer } from "@capactio/react-components";
 import Page from "../layout/Page";
 
 function InterfaceGroupCatalog() {
@@ -15,7 +15,7 @@ function InterfaceGroupCatalog() {
   );
   return (
     <Page breadcrumb={breadcrumb} title="Public Hub">
-      <InterfaceGroupsContainer />
+      <InterfaceGroupCardsContainer />
     </Page>
   );
 }
