@@ -32,7 +32,10 @@ const config = [
     plugins: [
       resolve(),
       commonJS(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.mdx", "**/*.stories.ts"]
+      }),
       postcss(),
       json(),
       terser(),
