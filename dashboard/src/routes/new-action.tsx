@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Breadcrumb } from "antd";
+import { WizardContainer } from "@capactio/react-components";
 import Page from "../layout/Page";
-import WizardContainer from "../wizard/Wizard.container";
 
 function NewAction() {
   const { path, revision } = useParams();

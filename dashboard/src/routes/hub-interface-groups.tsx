@@ -1,10 +1,10 @@
 import { Breadcrumb } from "antd";
 import React from "react";
-import InterfaceGroupsContainer from "../hub/InterfaceGroups.container";
-import Page from "../layout/Page";
 import { Link } from "react-router-dom";
+import { InterfaceGroupsContainer } from "@capactio/react-components";
+import Page from "../layout/Page";
 
-function NewInterfaceGroupCatalog() {
+function InterfaceGroupCatalog() {
   const breadcrumb = (
     <Breadcrumb>
       <Breadcrumb.Item>Hub</Breadcrumb.Item>
@@ -20,4 +20,4 @@ function NewInterfaceGroupCatalog() {
   );
 }
 
-export default NewInterfaceGroupCatalog;
+export default InterfaceGroupCatalog;

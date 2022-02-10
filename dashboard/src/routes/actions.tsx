@@ -1,8 +1,10 @@
 import React from "react";
 import { Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
-import ActionListContainer from "../actions/ActionList.container";
+
+import { ActionListContainer } from "@capactio/react-components";
 import Page from "../layout/Page";
+import { loadRuntimeConfig } from "../config/runtime";
 
 function Actions() {
   const breadcrumb = (
@@ -13,9 +15,11 @@ function Actions() {
     </Breadcrumb>
   );
 
+  const { queryRefetchIntervalMS } = loadRuntimeConfig();
+
   return (
     <Page breadcrumb={breadcrumb} title="Created Actions">
-      <ActionListContainer />
+      <ActionListContainer refetchInterval={queryRefetchIntervalMS} />
     </Page>
   );
 }
