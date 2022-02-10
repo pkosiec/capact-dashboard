@@ -1,4 +1,5 @@
 import resolve from "@rollup/plugin-node-resolve";
+import replace from '@rollup/plugin-replace';
 import commonJS from "@rollup/plugin-commonjs";
 import postcss from "rollup-plugin-postcss";
 import typescript from "@rollup/plugin-typescript";
@@ -30,11 +31,22 @@ const config = [
       },
     ],
     plugins: [
-      resolve(),
+      resolve({
+        browser: true,
+      }),
+      replace({
+        preventAssignment: true,
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }),
       commonJS(),
       typescript({
         tsconfig: "./tsconfig.json",
-        exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.mdx", "**/*.stories.ts"]
+        exclude: [
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.stories.mdx",
+          "**/*.stories.ts",
+        ],
       }),
       postcss(),
       json(),
