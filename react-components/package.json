@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "npm run build -- --watch",
-    "build": "rollup -c",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 rollup -c",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",

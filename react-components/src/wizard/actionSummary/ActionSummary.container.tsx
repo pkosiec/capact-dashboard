@@ -13,7 +13,6 @@ import {
 import { ActionSummary } from "./ActionSummary";
 import React, { useState } from "react";
 import { createActionGQLInput } from "./create-action-gql-input";
-import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 
 // generated name must match: '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*'
@@ -23,7 +22,9 @@ const genAdjsColorsAndNames: Config = {
   length: 3,
 };
 
-export interface ActionSummaryContainerProps extends StepComponentProps {}
+export interface ActionSummaryContainerProps extends StepComponentProps {
+  onActionCreate: (name: string) => void;
+}
 
 export interface ActionSummaryInput
   extends CreateActionWithInputMutationVariables {
@@ -40,7 +41,7 @@ export interface AdvancedModeInput {
   actionImplPath?: string;
 }
 
-export function ActionSummaryContainer({ wizardData }: ActionSummaryContainerProps) {
+export function ActionSummaryContainer({ wizardData, onActionCreate }: ActionSummaryContainerProps) {
   const defaultActionRandomName = uniqueNamesGenerator(genAdjsColorsAndNames);
   const [advancedInput, setAdvancedInput] = useState<AdvancedModeInput>({
     actionName: defaultActionRandomName,
@@ -49,7 +50,6 @@ export function ActionSummaryContainer({ wizardData }: ActionSummaryContainerPro
   const input = createActionGQLInput(wizardData, advancedInput);
 
   const { mutateAsync, isLoading } = useCreateActionWithInputMutation();
-  const navigate = useNavigate();
 
   const submitFn = async () => {
     try {
@@ -57,7 +57,7 @@ export function ActionSummaryContainer({ wizardData }: ActionSummaryContainerPro
       message.success(
         `Action '${data?.createAction.name}' created successfully`
       );
-      navigate(`/actions/${data?.createAction.name}`);
+      onActionCreate(data?.createAction.name);
     } catch (error) {
       message.error(`Failed to submit Action. Got error: ${error}`);
     }

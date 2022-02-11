@@ -6,9 +6,10 @@ import { ActionList, ActionItem } from "./ActionList";
 
 export interface ActionListContainerProps {
   refetchInterval?: number;
+  onActionClick: (name: string) => void;
 }
 
-export function ActionListContainer({ refetchInterval }: ActionListContainerProps) {
+export function ActionListContainer({ refetchInterval, onActionClick }: ActionListContainerProps) {
   const query = useActionListQuery(undefined, {
     refetchInterval,
   });
@@ -27,6 +28,7 @@ export function ActionListContainer({ refetchInterval }: ActionListContainerProp
 
   return (
     <ActionList
+      onActionClick={onActionClick}
       data={data}
       error={query.error as Error | undefined}
       isLoading={query.isLoading}

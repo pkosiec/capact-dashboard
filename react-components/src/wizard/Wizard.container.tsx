@@ -37,11 +37,13 @@ export interface StepComponentProps {
 export interface WizardContainerProps {
   interfacePath: string;
   interfaceRevision: string;
+  onActionCreate: (name: string) => void;
 }
 
 export function WizardContainer({
   interfacePath,
   interfaceRevision,
+  onActionCreate,
 }: WizardContainerProps) {
   const [currentStepIdx, setCurrentStep] = React.useState(0);
   const [wizardData, setWizardData] = React.useState<WizardData>(
@@ -70,7 +72,7 @@ export function WizardContainer({
   };
 
   const stepProps = { wizardData, setWizardData, navigateToNextStep: nextStep };
-  const steps = collectRequiredSteps(stepProps);
+  const steps = collectRequiredSteps(stepProps, onActionCreate);
   const canProceed = steps[currentStepIdx].canProceed(wizardData);
   const takeOverNextBtn = steps[currentStepIdx].replaceNextBtn(wizardData);
 
@@ -88,7 +90,7 @@ export function WizardContainer({
   );
 }
 
-function collectRequiredSteps(stepProps: StepComponentProps) {
+function collectRequiredSteps(stepProps: StepComponentProps, onActionCreate: (name: string) => void) {
   const steps: WizardSteps = [];
   const actionInput = stepProps.wizardData?.actionInterface?.spec.input;
 
@@ -96,13 +98,13 @@ function collectRequiredSteps(stepProps: StepComponentProps) {
     steps.push({
       title: "Input parameters",
       content: <InputParametersContainer {...stepProps} />,
-      canProceed: (data) => {
+      canProceed: () => {
         const { requiredLen, submittedLen } = requiredAddSubmittedParams(
           stepProps.wizardData ?? {}
         );
         return requiredLen === 0 || submittedLen === requiredLen;
       },
-      replaceNextBtn: (data) => {
+      replaceNextBtn: () => {
         return actionInput.parameters.length === 1;
       },
     });
@@ -112,7 +114,7 @@ function collectRequiredSteps(stepProps: StepComponentProps) {
     steps.push({
       title: "Input TypeInstances",
       content: <InputTypeInstancesContainer {...stepProps} />,
-      canProceed: (data) => {
+      canProceed: () => {
         const { requiredLen, selectedLen } = requiredAddSelectedTI(
           stepProps.wizardData
         );
@@ -124,7 +126,7 @@ function collectRequiredSteps(stepProps: StepComponentProps) {
 
   steps.push({
     title: "Summary",
-    content: <ActionSummaryContainer {...stepProps} />,
+    content: <ActionSummaryContainer {...stepProps} onActionCreate={onActionCreate}  />,
     canProceed: () => true,
     replaceNextBtn: () => true,
   });

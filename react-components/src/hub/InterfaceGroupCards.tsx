@@ -2,7 +2,7 @@ import { Avatar, Badge, Card, Col, Row, Skeleton, Typography } from "antd";
 import React from "react";
 import { InterfaceGroup as InterfaceGroupGQL } from "../generated/graphql";
 import { ErrorAlert } from "../layout";
-import { useNavigate } from "react-router-dom";
+
 import "./InterfaceGroup.css";
 
 const { Paragraph } = Typography;
@@ -14,14 +14,15 @@ export interface InterfaceGroupCardsProps {
   interfaceGroups: InterfaceGroupGQL[];
   error?: Error;
   isLoading: boolean;
+  onInterfaceGroupClick: (interfaceGroupPath: string) => void;
 }
 
 export function InterfaceGroupCards({
   interfaceGroups,
   error,
   isLoading,
+  onInterfaceGroupClick
 }: InterfaceGroupCardsProps) {
-  const navigate = useNavigate();
 
   if (isLoading) {
     return LoadingCards();
@@ -39,7 +40,7 @@ export function InterfaceGroupCards({
           className="content-bg-rounded"
           hoverable={ifaceCnt > 0}
           onClick={() => {
-            ifaceCnt && navigate(`/hub/interface-groups/${metadata.path}`);
+            ifaceCnt && onInterfaceGroupClick(metadata.path);
           }}
           bordered={false}
         >

@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { CenteredSpinner, ErrorAlert } from "../layout";
 import { SearchOutlined } from "@ant-design/icons";
 import {
-  interfaceActionsButtons,
   InterfaceRevisionWithKey,
 } from "./Interfaces.container";
 import { TypeReference } from "../generated/graphql";
+import { renderInterfaceActionsButtons } from ".";
 
 const { Item } = List;
 
@@ -15,9 +15,10 @@ export interface InterfacesListProps {
   interfaces?: InterfaceRevisionWithKey[];
   error?: Error;
   isLoading: boolean;
+  onInterfaceClick: (path: string, revision: string) => void;
 }
 
-export function InterfacesList({ interfaces, error, isLoading }: InterfacesListProps) {
+export function InterfacesList({ interfaces, error, isLoading, onInterfaceClick }: InterfacesListProps) {
   const [namePrefix, setNamePrefix] = useState("");
 
   if (isLoading) {
@@ -61,9 +62,10 @@ export function InterfacesList({ interfaces, error, isLoading }: InterfacesListP
           const inputParams = toCodeItemList(rev?.spec.input.parameters);
           const inputTIss = toCodeItemList(rev?.spec.input.typeInstances);
           const output = toCodeItemList(rev?.spec.output.typeInstances);
+          const actions = renderInterfaceActionsButtons(rev, () => onInterfaceClick(rev.metadata.path, rev.revision));
 
           return (
-            <Item className="list-item" actions={interfaceActionsButtons(rev)}>
+            <Item className="list-item" actions={actions}>
               <Row>
                 <Col span={10}>
                   <Item.Meta

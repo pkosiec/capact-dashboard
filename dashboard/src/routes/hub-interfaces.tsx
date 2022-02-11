@@ -25,6 +25,11 @@ function InterfacesCatalog() {
       <Breadcrumb.Item>{name}</Breadcrumb.Item>
     </Breadcrumb>
   );
+
+  const onInterfaceClick =  (path: string, revision: string) => {
+    navigate(`/actions/new/${path}/${revision}`)
+  }
+
   return (
     <Page
       breadcrumb={breadcrumb}
@@ -43,7 +48,7 @@ function InterfacesCatalog() {
       title="Public Hub"
       onBack={() => navigate("/hub/interface-groups")}
     >
-      <InterfacesContainer path={name} view={view} />
+      <InterfacesContainer path={name} view={view} onInterfaceClick={onInterfaceClick} />
     </Page>
   );
 }

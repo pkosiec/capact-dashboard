@@ -1,3 +1,4 @@
+export * from './render-interface-action-buttons';
 export * from './InterfaceGroupCards';
 export * from './InterfaceGroupCards.container';
 export * from './Interfaces.container';

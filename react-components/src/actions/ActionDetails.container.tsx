@@ -1,6 +1,6 @@
 import { message } from "antd";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import {
   ActionStatusPhase,
   useActionQuery,
@@ -14,14 +14,15 @@ export interface ActionDetailsContainerProps {
   name: string;
   refetchInterval?: number;
   argoWorkflowsUIBaseURL: string;
+  onDeleteAction?: (name: string) => void;
 }
 
-export function ActionDetailsContainer({ name, refetchInterval, argoWorkflowsUIBaseURL }: ActionDetailsContainerProps) {
+export function ActionDetailsContainer({ name, refetchInterval, argoWorkflowsUIBaseURL, onDeleteAction }: ActionDetailsContainerProps) {
   const { data, error, isLoading } = useActionQuery(
     { actionName: name },
     { refetchInterval }
   );
-  const navigate = useNavigate();
+
   const runActionMutation = useRunActionMutation();
   const deleteActionMutation = useDeleteActionMutation();
 
@@ -41,7 +42,9 @@ export function ActionDetailsContainer({ name, refetchInterval, argoWorkflowsUIB
     try {
       await deleteActionMutation.mutateAsync({ actionName: name });
       message.success(`Successfully scheduled Action '${name}' deletion`);
-      navigate("/actions");
+      if (onDeleteAction) {
+        onDeleteAction(name);
+      }
     } catch (err) {
       const error = err as Error;
       message.error(
