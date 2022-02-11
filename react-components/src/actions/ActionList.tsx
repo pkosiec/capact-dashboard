@@ -22,7 +22,6 @@ export interface ActionListProps {
   onActionClick: (name: string) => void;
 }
 
-
 export function ActionList({ data, isLoading, error, onActionClick }: ActionListProps) {
   if (error) {
     return <ErrorAlert error={error} />;

@@ -3,11 +3,9 @@ import "./InterfacesList.css";
 import React, { useState } from "react";
 import { CenteredSpinner, ErrorAlert } from "../layout";
 import { SearchOutlined } from "@ant-design/icons";
-import {
-  InterfaceRevisionWithKey,
-} from "./Interfaces.container";
 import { TypeReference } from "../generated/graphql";
-import { renderInterfaceActionsButtons } from ".";
+import { renderInterfaceActionsButtons } from "./render-interface-action-buttons";
+import { InterfaceRevisionWithKey } from "./interface-revision";
 
 const { Item } = List;
 

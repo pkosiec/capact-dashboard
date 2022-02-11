@@ -1,20 +1,16 @@
 import React from "react";
 import {
-  InterfaceRevision,
   useListInterfacesFromInterfaceGroupQuery,
 } from "../generated/graphql";
 import { InterfacesCard } from "./InterfacesCard";
 import { ResourceReference } from "../wizard/ResourceRef";
 import { InterfacesList } from "./InterfacesList";
 import { Result } from "antd";
+import { InterfaceRevisionWithKey } from ".";
 
 export enum InterfacesView {
   Card,
   List,
-}
-
-export interface InterfaceRevisionWithKey extends InterfaceRevision {
-  key: string;
 }
 
 export interface InterfacesContainerProps {

@@ -4,7 +4,10 @@ import { Button, Modal, Space } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { AdditionalInputSchema } from "./SelectImplAdditionalInput.container";
 import { ErrorAlert, Form, CenteredSpinner } from "../../layout";
-import Title from "antd/lib/typography/Title";
+
+import { Typography } from "antd";
+
+const { Title } = Typography;
 
 export interface ImplAdditionalInputSectionProps {
   additionalInputSchema: AdditionalInputSchema;

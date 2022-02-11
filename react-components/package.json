@@ -8,8 +8,8 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "npm run build -- --watch",
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 rollup -c",
+    "start": "NODE_OPTIONS=--max_old_space_size=4096 rollup -c --watch",
+    "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 rollup -c",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
@@ -17,9 +17,14 @@
     "generate-graphql-hooks": "set -o allexport;. .env; set +o allexport; graphql-codegen --config codegen.yml; prettier --write 'src/generated/**/*.{js,jsx,ts,tsx,json,css,scss,md,graphql}' 'graphql.schema.json'"
   },
   "peerDependencies": {
+    "@ant-design/icons": "^4.7.0",
     "antd": "^4.18.5",
     "react": "^17.0.2",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "@rjsf/antd": "^3.2.1",
+    "@rjsf/core": "^3.2.1",
+    "unique-names-generator": "^4.6.0",
+    "react-query": "^3.33.7"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
@@ -53,9 +58,9 @@
     "graphql": "^16.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
-    "react-query": "^3.33.7",
     "rollup": "^2.67.0",
     "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-watch": "^4.3.1",

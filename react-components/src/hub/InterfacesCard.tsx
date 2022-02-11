@@ -1,10 +1,8 @@
 import { Card, Col, Row, Statistic } from "antd";
 import React from "react";
-import { renderInterfaceActionsButtons } from ".";
+import { renderInterfaceActionsButtons } from "./render-interface-action-buttons";
+import { InterfaceRevisionWithKey } from "./interface-revision";
 import { CenteredSpinner, ErrorAlert } from "../layout";
-import {
-  InterfaceRevisionWithKey,
-} from "./Interfaces.container";
 import "./InterfacesCard.css";
 
 export interface InterfacesCardProps {

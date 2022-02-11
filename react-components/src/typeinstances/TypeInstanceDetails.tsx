@@ -3,11 +3,10 @@ import { Button, Descriptions, List, Modal, Typography } from "antd";
 import { ErrorAlert } from "../layout";
 import { CenteredSpinner } from "../layout/CenteredSpinner";
 import { TypeInstanceQuery } from "../generated/graphql";
-import Paragraph from "antd/lib/typography/Paragraph";
 
 import "./TypeInstanceDetails.css";
 
-const { Text } = Typography;
+const { Text, Paragraph } = Typography;
 
 export interface TypeInstanceDetailsProps {
   visible: boolean;

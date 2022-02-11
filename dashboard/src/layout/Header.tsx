@@ -8,9 +8,9 @@ import {
   QuestionCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import SubMenu from "antd/lib/menu/SubMenu";
 import { Link } from "react-router-dom";
 
+const { SubMenu } = Menu;
 const { Header: AntHeader } = Layout;
 
 function Header() {
