@@ -34,6 +34,7 @@ const plugins = [
       "**/*.stories.mdx",
       "**/*.stories.ts",
     ],
+    sourceMap: isDevMode,
   }),
   postcss(),
   json(),
@@ -53,12 +54,12 @@ const config = [
       {
         file: packageJSON.main,
         format: "cjs",
-        sourcemap: true,
+        sourcemap: isDevMode,
       },
       {
         file: packageJSON.module,
         format: "esm",
-        sourcemap: true,
+        sourcemap: isDevMode,
       },
     ],
     plugins,
